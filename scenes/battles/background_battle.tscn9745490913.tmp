@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsp1tf2yba6b3"]
+
+[ext_resource type="Texture2D" uid="uid://1fiarva537fv" path="res://assets/Images/HUD.png" id="1_kmnt7"]
+[ext_resource type="Script" uid="uid://tca1fsvvl2j" path="res://script/battles/background_battle.gd" id="1_sshxk"]
+[ext_resource type="Resource" uid="uid://ba5x42xkc5sl5" path="res://themes/Card.tres" id="2_2e1rm"]
+[ext_resource type="Theme" uid="uid://dwqnh72ghy6g8" path="res://themes/UI_menu.tres" id="2_ac3r6"]
+[ext_resource type="PackedScene" uid="uid://bw7debbvpeq32" path="res://scenes/battles/card/card_ui.tscn" id="3_jfm1x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trf7u"]
+size = Vector2(763, 113)
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_sshxk")
+card = ExtResource("2_2e1rm")
+
+[node name="Hud" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("1_kmnt7")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 489.0
+offset_top = 202.0
+offset_right = 691.0
+offset_bottom = 487.0
+theme = ExtResource("2_ac3r6")
+text = "To fazendo,
+isso aqui eh
+só de teste
+de como vai 
+ficar o final
+"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(561.5, 591.5)
+shape = SubResource("RectangleShape2D_trf7u")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ActionCard" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 413.0
+offset_top = 449.0
+offset_right = 755.0
+offset_bottom = 539.0
+
+[node name="card_ui" parent="CanvasLayer/ActionCard" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+
+[node name="card_ui2" parent="CanvasLayer/ActionCard" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+
+[node name="card_ui3" parent="CanvasLayer/ActionCard" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+
+[node name="card_ui4" parent="CanvasLayer/ActionCard" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+
+[node name="card_ui5" parent="CanvasLayer/ActionCard" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+
+[node name="Deck" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

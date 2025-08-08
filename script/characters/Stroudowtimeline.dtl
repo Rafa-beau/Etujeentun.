@@ -1,0 +1,11 @@
+[style name="ChatBox"]
+join stroudow leftmost [length="2.0"]
+stroudow: Vamos lutar
+- Jamais
+	[signal arg="jumpscare"]
+	[wait time="0.8"]
+	[background arg="res://assets/Images/teste.png" fade="0.0" transition="Simple Fade"]
+	[wait time="3.5"]
+	[end_timeline]
+- vamo
+	[signal arg="start_battle"]

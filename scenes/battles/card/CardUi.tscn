@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://bw7debbvpeq32"]
+
+[ext_resource type="Theme" uid="uid://blmg6gi8jxtsh" path="res://themes/card_ui.tres" id="1_01dg0"]
+[ext_resource type="Script" uid="uid://c71goahd4sojc" path="res://script/battles/card/card_ui.gd" id="1_x1o6d"]
+[ext_resource type="Script" uid="uid://ca1gi8bh5nw0o" path="res://script/battles/card/card_data.gd" id="2_gui3t"]
+[ext_resource type="Texture2D" uid="uid://wnudk178jldx" path="res://assets/Images/elements_types.png" id="4_ksrd3"]
+[ext_resource type="Script" uid="uid://byegx6cl33qhf" path="res://script/battles/card/card_states/card_state_machine.gd" id="5_v0xck"]
+[ext_resource type="Script" uid="uid://dskut47k50qg7" path="res://script/battles/card/card_states/card_base_state.gd" id="6_gui3t"]
+[ext_resource type="Script" uid="uid://detpah7jetxd2" path="res://script/battles/card/card_states/card_clicked_state.gd" id="7_n8vt2"]
+[ext_resource type="Script" uid="uid://ij5fvrw6443p" path="res://script/battles/card/card_states/card_dragging_state.gd" id="8_nq7hf"]
+[ext_resource type="Script" uid="uid://cla8t44xbl8pa" path="res://script/battles/card/card_states/card_released_state.gd" id="9_lii3k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_637op"]
+size = Vector2(60, 90)
+
+[node name="card_ui" type="Control"]
+custom_minimum_size = Vector2(60, 90)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1092.0
+offset_bottom = -558.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x1o6d")
+card = ExtResource("2_gui3t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(30, 44)
+texture = ExtResource("4_ksrd3")
+
+[node name="Strength" type="Label" parent="."]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -2.0
+offset_right = 22.0
+offset_bottom = 25.0
+theme = ExtResource("1_01dg0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Life" type="Label" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = -17.0
+offset_right = 88.0
+offset_bottom = 41.0
+theme = ExtResource("1_01dg0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 91.0
+mouse_filter = 2
+color = Color(0.572988, 0.572988, 0.572988, 1)
+
+[node name="State" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 26.0
+offset_right = 60.0
+offset_bottom = 64.0
+theme = ExtResource("1_01dg0")
+text = "STATE"
+
+[node name="dropPoint" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dropPoint"]
+position = Vector2(30, 45)
+shape = SubResource("RectangleShape2D_637op")
+
+[node name="CardStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_v0xck")
+initial_state = NodePath("CardBaseState")
+
+[node name="CardBaseState" type="Node" parent="CardStateMachine"]
+script = ExtResource("6_gui3t")
+
+[node name="CardClickedState" type="Node" parent="CardStateMachine"]
+script = ExtResource("7_n8vt2")
+state = 1
+
+[node name="CardDraggingState" type="Node" parent="CardStateMachine"]
+script = ExtResource("8_nq7hf")
+state = 2
+
+[node name="CardReleasedState" type="Node" parent="CardStateMachine"]
+script = ExtResource("9_lii3k")
+state = 4
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="dropPoint" to="." method="_on_drop_point_mouse_entered"]

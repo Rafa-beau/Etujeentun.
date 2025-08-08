@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Card" load_steps=2 format=3 uid="uid://ba5x42xkc5sl5"]
+
+[ext_resource type="Script" uid="uid://ca1gi8bh5nw0o" path="res://script/battles/card/card_data.gd" id="1_vgdqn"]
+
+[resource]
+script = ExtResource("1_vgdqn")
+mode = 0
+element = 0
+strength = 0
+life = 0
+type = 0
+special_strength = false
+special_life = false
+metadata/_custom_type_script = "uid://ca1gi8bh5nw0o"

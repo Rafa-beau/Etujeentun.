@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://qnfl2lj77ljr"]
+
+[ext_resource type="Script" uid="uid://mpo48p0ca2ux" path="res://script/breathing_things/npc.gd" id="1_qmc6j"]
+[ext_resource type="Texture2D" uid="uid://ojev41o7d0xp" path="res://assets/Images/Stroudow.png" id="2_52uap"]
+[ext_resource type="AudioStream" uid="uid://de2sj21otc5is" path="res://assets/sound/plankton-augh.mp3" id="3_vl4gy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52uap"]
+size = Vector2(14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0p6j"]
+atlas = ExtResource("2_52uap")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsati"]
+atlas = ExtResource("2_52uap")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2pua"]
+atlas = ExtResource("2_52uap")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdje1"]
+atlas = ExtResource("2_52uap")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmxsd"]
+atlas = ExtResource("2_52uap")
+region = Rect2(320, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0g767"]
+atlas = ExtResource("2_52uap")
+region = Rect2(400, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rp76r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0p6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsati")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2pua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdje1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmxsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0g767")
+}],
+"loop": true,
+"name": &"stroudow_idle",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qmu3h"]
+radius = 35.6931
+
+[node name="npc" type="CharacterBody2D"]
+script = ExtResource("1_qmc6j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(61, 27)
+shape = SubResource("RectangleShape2D_52uap")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(61, 27)
+sprite_frames = SubResource("SpriteFrames_rp76r")
+animation = &"stroudow_idle"
+frame_progress = 0.00949452
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_vl4gy")
+volume_db = 24.0
+
+[node name="start_battle_chat" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="start_battle_chat"]
+position = Vector2(61, 27)
+shape = SubResource("CircleShape2D_qmu3h")
+debug_color = Color(0, 1, 1, 0.419608)
+
+[connection signal="body_entered" from="start_battle_chat" to="." method="_on_start_battle_chat_body_entered"]
+[connection signal="body_exited" from="start_battle_chat" to="." method="_on_start_battle_chat_body_exited"]

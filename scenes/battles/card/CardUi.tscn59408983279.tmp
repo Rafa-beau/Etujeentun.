@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw7debbvpeq32"]
+
+[ext_resource type="Theme" uid="uid://blmg6gi8jxtsh" path="res://themes/card_ui.tres" id="1_01dg0"]
+[ext_resource type="Script" uid="uid://c71goahd4sojc" path="res://script/battles/card/card_ui.gd" id="1_x1o6d"]
+[ext_resource type="Resource" uid="uid://ba5x42xkc5sl5" path="res://themes/Card.tres" id="2_32sp0"]
+[ext_resource type="Texture2D" uid="uid://wnudk178jldx" path="res://assets/Images/elements_types.png" id="4_ksrd3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_637op"]
+size = Vector2(60, 90)
+
+[node name="CardUi" type="Control"]
+custom_minimum_size = Vector2(60, 90)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1092.0
+offset_bottom = -558.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x1o6d")
+card = ExtResource("2_32sp0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(30, 44)
+texture = ExtResource("4_ksrd3")
+
+[node name="Element" type="Label" parent="."]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 13.0
+offset_right = 68.0
+offset_bottom = 71.0
+theme = ExtResource("1_01dg0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Strength" type="Label" parent="."]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 48.0
+offset_right = 34.0
+offset_bottom = 106.0
+theme = ExtResource("1_01dg0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Life" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 48.0
+offset_right = 84.0
+offset_bottom = 106.0
+theme = ExtResource("1_01dg0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="dropPoint" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dropPoint"]
+position = Vector2(30, 45)
+shape = SubResource("RectangleShape2D_637op")
+
+[connection signal="mouse_entered" from="dropPoint" to="." method="_on_drop_point_mouse_entered"]

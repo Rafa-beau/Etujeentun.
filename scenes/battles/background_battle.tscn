@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsp1tf2yba6b3"]
+
+[ext_resource type="Texture2D" uid="uid://1fiarva537fv" path="res://assets/Images/HUD.png" id="1_kmnt7"]
+[ext_resource type="Script" uid="uid://tca1fsvvl2j" path="res://script/battles/background_battle.gd" id="1_sshxk"]
+[ext_resource type="Theme" uid="uid://dwqnh72ghy6g8" path="res://themes/UI_menu.tres" id="2_ac3r6"]
+[ext_resource type="PackedScene" uid="uid://bw7debbvpeq32" path="res://scenes/battles/card/CardUi.tscn" id="3_jfm1x"]
+[ext_resource type="Script" uid="uid://bfxlvac5rmkag" path="res://scenes/battles/hand.gd" id="4_2e1rm"]
+[ext_resource type="Resource" uid="uid://bg8or386lsr7p" path="res://script/battles/card/fire_card.tres" id="6_3lgy8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trf7u"]
+size = Vector2(779.5, 425)
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_sshxk")
+
+[node name="Hud" type="Sprite2D" parent="."]
+position = Vector2(576.5, 324.5)
+scale = Vector2(3.59687, 3.59444)
+texture = ExtResource("1_kmnt7")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 489.0
+offset_top = 202.0
+offset_right = 691.0
+offset_bottom = 487.0
+theme = ExtResource("2_ac3r6")
+text = "To fazendo,
+isso aqui eh
+só de teste
+de como vai 
+ficar o final
+"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(561, 215)
+shape = SubResource("RectangleShape2D_trf7u")
+debug_color = Color(0.184314, 1, 1, 0.419608)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." groups=["ui_layer"]]
+
+[node name="Hand" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 406.0
+offset_top = 443.0
+offset_right = 748.0
+offset_bottom = 533.0
+alignment = 1
+script = ExtResource("4_2e1rm")
+
+[node name="card_ui" parent="CanvasLayer/Hand" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+card = ExtResource("6_3lgy8")
+
+[node name="card_ui2" parent="CanvasLayer/Hand" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+card = ExtResource("6_3lgy8")
+
+[node name="card_ui3" parent="CanvasLayer/Hand" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+card = ExtResource("6_3lgy8")
+
+[node name="card_ui4" parent="CanvasLayer/Hand" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+card = ExtResource("6_3lgy8")
+
+[node name="card_ui5" parent="CanvasLayer/Hand" instance=ExtResource("3_jfm1x")]
+layout_mode = 2
+card = ExtResource("6_3lgy8")
+
+[node name="Deck" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="CanvasLayer/Hand/card_ui" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="CanvasLayer/Hand/card_ui" method="_on_area_2d_area_exited"]
