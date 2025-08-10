@@ -71,7 +71,8 @@ shape = SubResource("RectangleShape2D_52uap")
 position = Vector2(61, 27)
 sprite_frames = SubResource("SpriteFrames_rp76r")
 animation = &"stroudow_idle"
-frame_progress = 0.00949452
+frame = 1
+frame_progress = 0.751389
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_vl4gy")

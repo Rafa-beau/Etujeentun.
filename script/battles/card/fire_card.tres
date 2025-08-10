@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource("1_8v8hv")
 mode = 0
-element = 0
-strength = 0
-life = 0
+element = 2
+strength = 4
+life = 7
 type = 0
 special_strength = false
 special_life = false
